@@ -28,7 +28,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_ACKLEY
 #define DNN_OPT_COPT_SOLUTIONS_ACKLEY
 
-#include <core/solutions/ackley.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -47,8 +46,7 @@ namespace solutions
  * @version 1.0
  * @date November, 2018
  */
-class ackley : public virtual solution,
-               public virtual core::solutions::ackley
+class ackley : public virtual solution
 {
 public:
 
@@ -79,7 +77,7 @@ protected:
    *
    * @param size is the number of parameters for this solution. Default is 10.
    */
-  ackley(generator* generator, unsigned int size = 10 );
+  ackley(generator* generator, unsigned int size = 10);
 
 };
 

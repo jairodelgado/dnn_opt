@@ -55,9 +55,14 @@ generator* solution::get_generator() const
 }
 
 solution::solution(generator* generator, unsigned int size)
-: core::solution(generator, size)
 {
   _copt_generator = generator;
+  _size = size;
+  _evaluations = 0;
+  _params = 0;
+
+  set_modified(true);
+
 }
 
 } // namespace copt

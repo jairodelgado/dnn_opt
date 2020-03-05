@@ -28,6 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_HYPER
 #define DNN_OPT_COPT_SOLUTIONS_HYPER
 
+#include <functional>
 #include <core/solutions/hyper.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
@@ -47,12 +48,15 @@ namespace solutions
  * @version 1.0
  * @date November, 2017
  */
-class hyper : public virtual solution,
-              public virtual core::solutions::hyper
+class hyper : public virtual solution
 {
 public:
 
   static hyper* make(generator* generator, algorithm* base, unsigned int size);
+
+  virtual algorithm* get_algorithm() const;
+
+  void set_do_optimize(std::function<void(algorithm*)> do_optimize);
 
   virtual hyper* clone() override;
 
@@ -60,11 +64,19 @@ public:
 
   virtual void assign(solution* s) override;
 
-  virtual algorithm* get_algorithm() const;
-
   virtual ~hyper();
 
 protected:
+
+   /**
+    * @copydoc solution::calculate_fitness()
+    *
+    * Performs @ref get_iteration_count() optimization steeps of the provided
+    * @ref get_algorithm() and returns its fitness.
+    *
+    * @return the fitness of this solution.
+    */
+  virtual float calculate_fitness() override;
 
   /**
    * @brief The basic contructor for this class.
@@ -75,10 +87,12 @@ protected:
    *
    * @param size is the number of parameters for this solution. Default is 10.
    */
-  hyper(generator* generator, algorithm* base, unsigned int size = 10 );
+  hyper(generator* generator, algorithm* base, unsigned int size = 10);
 
-  /** A pointer to _algorithm that do not degrade to core::algorithm */
+  /** The elementary optimization algorithm */
   algorithm* _copt_algorithm;
+
+  std::function<void(algorithm*)> _do_optimize;
 
 };
 

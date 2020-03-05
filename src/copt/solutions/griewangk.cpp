@@ -41,9 +41,7 @@ float griewangk::calculate_fitness()
 }
 
 griewangk::griewangk(generator* generator, unsigned int size)
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::griewangk(generator, size)
+: solution(generator, size)
 {
 
 }

@@ -28,7 +28,6 @@ float ackley::calculate_fitness()
 
   solution::calculate_fitness();
 
-  #pragma omp simd
   for(int i = 0; i < n; i++)
   {
     summatory_1 += pow(params[i], 2);
@@ -41,11 +40,9 @@ float ackley::calculate_fitness()
   return result;
 }
 
-ackley::ackley(generator* generator, unsigned int size)
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::ackley(generator, size)
+ackley::ackley(generator* generator, unsigned int size) : solution(generator, size)
 {
+
 
 }
 

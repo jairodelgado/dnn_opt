@@ -53,9 +53,7 @@ algorithm* hyper::get_algorithm() const
 }
 
 hyper::hyper(generator* generator, algorithm* base, unsigned int size)
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::hyper(generator, base, size)
+: solution(generator, size)
 {
   _copt_algorithm = base;
 }

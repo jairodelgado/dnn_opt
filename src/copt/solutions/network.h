@@ -44,8 +44,7 @@ namespace copt
 namespace solutions
 {
 
-class network : public virtual solution,
-                public virtual core::solutions::network
+class network : public virtual solution
 {
 public:
 
@@ -53,13 +52,61 @@ public:
 
   virtual network* clone() override;
 
-  virtual bool assignable(const dnn_opt::core::solution* s) const override;
+  virtual bool assignable(const solution* s) const override;
 
-  virtual void set_reader(core::reader* reader) override;
+  void add_layer(std::initializer_list<layer*> layers);
 
-  virtual reader* get_reader() const override;
+  /**
+   * Add a new layer at the end of all layers. Make sure to call init()
+   * when you finish to alter the network layered structure.
+   *
+   * @param layer the new layer to be added.
+   *
+   * @return a pointer to this solution.
+   */
+  network* add_layer(layer* layer);
 
-  virtual error* get_error() const override;
+  /**
+   * @brief The reader used to obtain the training patterns.
+   *
+   * @return a constant pointer to the reader.
+   */
+  virtual reader* get_reader() const;
+
+  /**
+   * @brief Change the reader used to obtain the training patterns in order to
+   * calculate this network fitness.
+   *
+   * This method is expensive because it alters the network internal structure
+   * that involves memory allocations and de-allocations. Use with caution.
+   *
+   * @param reader a reader containing the training patterns.
+   */
+  virtual void set_reader(reader* reader);
+
+  /**
+   * @brief Propagate a validation set of patterns through the network and
+   * calculate generalization error.
+   *
+   * @param reader a reader containing the validation set of patterns
+   *
+   * @return the generalization error based on the error of this
+   * network.
+   */
+  virtual float test(reader* validation_set);
+
+  virtual float* predict(reader* validation_set);
+
+  virtual void init() override;
+
+  /**
+   * @brief The error function used to calculate the fitness of the network.
+   *
+   * @return a constant pointer to the error.
+   */
+  virtual error* get_error() const;
+
+
 
   /**
    * @brief The basic destructor of the network class.
@@ -71,31 +118,61 @@ protected:
   /** Forward declaration of linked network class  */
   class linked;
 
+  virtual float calculate_fitness() override;
+
+  /**
+   * @brief Propagate the training patterns in through the network
+   * and returns the network output for each training pattern.
+   *
+   * @return a flatten array of dimension [get_reader()->batch_size() x
+   * get_reader()->out_get_dim()] in a row by row fashion.
+   */
+  const float* prop();
+
   network(generator* generator, reader* reader, error* error);
 
   network(generator* generator);
 
-private:
+  /** List of layers in cascade to propagate the input signal */
+  std::vector<layer*> _layers;
 
+  /** Reader that provides the list of training patterns */
   reader* _copt_reader;
+
+  /** Error function used to calculate the fitness of the network */
   error* _copt_error;
+public:////////////////////////////////////////////////////////////////////////
+  /**
+   * Output of the layer i that is currently propagating the input signal.
+   * This is a flatten array of dimension [_r->batch_size() x _max_out] in
+   * a row by row fashion.
+   */
+  static float* CURRENT_OUT;
+
+  /**
+   * The output of the layer i - 1.
+   * This is a flatten array of dimension [_r->batch_size() x _max_out] in
+   * a row by row fashion.
+   */
+  static float* PRIOR_OUT;
+protected://///////////////////////////////////////////////////////////////////
+  /** The amount of outputs of the layer with the higher amount of units */
+  int _max_out;
 
 };
 
-class network::linked : public virtual network,
-                        public virtual core::solutions::network::linked
+/* TODO: implement all methods respect _source! */
+class network::linked : public virtual network
 {
 friend class network;
 
 public:
 
-  using core::solutions::network::linked::fitness;
-
-  virtual void set_reader(core::reader* reader) override;
+  virtual float fitness() override;
 
   virtual reader* get_reader() const override;
 
-  using core::solutions::network::linked::set_reader;
+  virtual void set_reader(reader* reader) override;
 
   virtual error* get_error() const override;
 
@@ -103,7 +180,11 @@ protected:
 
   linked(network* base);
 
+  /** The linked network solution that is being tracked */
+  network* _base;
+
 };
+
 
 } // namespace solutions
 } // namespace copt

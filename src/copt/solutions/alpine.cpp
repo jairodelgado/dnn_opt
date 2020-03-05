@@ -1,4 +1,4 @@
-#include <cmath>
+#include <math.h>
 #include <copt/solutions/alpine.h>
 
 namespace dnn_opt
@@ -35,9 +35,7 @@ float alpine::calculate_fitness()
 }
 
 alpine::alpine(generator* generator, unsigned int size)
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::alpine(generator, size)
+: solution(generator, size)
 {
 
 }

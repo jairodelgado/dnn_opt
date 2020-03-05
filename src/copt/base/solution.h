@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTION
 #define DNN_OPT_COPT_SOLUTION
 
-#include <core/base/solution.h>
+#include <copt/base/solution.h>
 #include <copt/base/generator.h>
 
 namespace dnn_opt
@@ -45,11 +45,55 @@ namespace copt
  * @date June, 2016
  * @version 1.0
  */
-class solution : public virtual core::solution
+class solution
 {
 public:
 
   static solution* make(generator* generator, unsigned int size);
+
+  /**
+   * @brief Change the value of all the parameters of this solution.
+   *
+   * @param value the new parameter's value.
+   */
+  void set(float value);
+
+  /**
+   * @brief Change the value of a given parameter.
+   *
+   * @param index the index of the parameter to be changed.
+   *
+   * @param value the new parameter's value.
+   *
+   * @throws std::out_of_bounds if the index is incorrect.
+   */
+  virtual void set(unsigned int index, float value);
+
+  /**
+   * @brief The value of a given parameter.
+   *
+   * @param index the index of the parameter to be returned.
+   *
+   * @return the current value of the parameter.
+   *
+   * @throws assertion if the index is incorrect.
+   */
+  virtual float get(unsigned int index) const;
+
+  /**
+   * @brief The number of parameters of this solution.
+   *
+   * @return the number of parameters.
+   */
+  virtual unsigned int size() const;
+
+  /**
+   * @brief The parameters of this solution. If the parameters are modified
+   * outside this class, ensure to notify it by calling set_modified().
+   *
+   * @return an array containing the parameters.
+   */
+  virtual float* get_params() const;
 
   /**
    * @brief Creates an exact replica of this solution.
@@ -70,17 +114,117 @@ public:
 
   virtual void assign(solution* s);
 
-  virtual generator* get_generator() const override;
+  /**
+   * @brief Calculate the fitness of this solution.
+   *
+   * This function returns a precalculated fitness if there have not been
+   * changes in its parameters, otherwise calls calculate_fitness().
+   *
+   * @return the fitness value of this solution.
+   */
+  virtual float fitness();
+
+  /**
+   * @brief Initialize the parameters of this solution based on the provided
+   * @ref get_generator() and restart the number of @ref get_evaluations().
+   */
+  virtual void generate();
+
+  /**
+   * @brief Change the state of this solution to ensure the calculation of
+   * fitness() next time instead of using the stored value from previous
+   * calculations. Use this method when the parameters of this solution have
+   * changed from outside this class and you want to notify it.
+   *
+   * @param modified the state of the parameters of this class. Set true when
+   * the parameters have changed and the stored fitness value is obsolete,
+   * false otherwise.
+   */
+  virtual void set_modified(bool modified);
+
+  /**
+   * @brief Constrain the values of the parameters of this solution. The values
+   * of this solution parameters are setted to [@ref generator::min(),
+   * @ref generator::max()]
+   */
+  virtual void set_constrains();
+
+  /**
+   * @brief Check if this solution has a better fitness value than
+   * the specified one considering the specified optimization operation.
+   *
+   * If maximization, a solution is better than another if its fitness is
+   * higher than the other. If minimization, a solution is better than another
+   * if its fitness is lower than the other.
+   *
+   * @param s the solution to check if is better or not than this one.
+   *
+   * @param maximization the optimization operation; true for maximization,
+   * false for minimization.
+   *
+   * @return true if this solution has better fitness value, false otherwise.
+   */
+  bool is_better_than(solution* s, bool max);
+
+  bool is_modified();
+
+  /**
+   * @brief The number of evaluations of the objective function.
+   *
+   * @return an integer the number of evaluation.
+   */
+  int get_evaluations();
+
+  void set_evaluations(int evaluations);
+
+  /**
+   * @brief Allocate memory used by this solution. Derived classes should
+   * implement factory pattern and call this method before returning.
+   */
+  virtual void init();
+
+  /**
+   * @brief The @ref generator used to generate random parameters
+   * for this solution.
+   *
+   * @return a pointer to the @ref generator.
+   */
+  virtual generator* get_generator() const;
+
+  virtual ~solution();
 
 protected:
+
+  /**
+   * @brief Calculate the fitness of this solution from its parameters.
+   *
+   * @return the fitness of this solution.
+   */
+  virtual float calculate_fitness();
 
   /**
    * @brief The basic constructor of the solution class.
    */
   solution(generator* generator, unsigned int size);
 
-  /** a pointer to _generator that do not degrade to core::generator */
+  /** Specify if the parameters have changed and the fitnes have changed */
+  bool _modified;
+
+  /** The latest known fitness produced by calculate_fitness() */
+  float _fitness;
+
+  /** The number of calls to the objective function calculate_fitness() */
+  int _evaluations;
+
+  /** The generator used to initialize the parameters this solution */
   generator* _copt_generator;
+
+  /** The array containing the parameters of this solution*/
+  float* _params;
+
+  /** The amount of parameters of this solution */
+  unsigned int _size;
+
 };
 
 } // namespace copt

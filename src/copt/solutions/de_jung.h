@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_DE_JUNG
 #define DNN_OPT_COPT_SOLUTIONS_DE_JUNG
 
-#include <core/solutions/de_jung.h>
+#include <core/solutions/bench/de_jung.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -46,8 +46,7 @@ namespace solutions
  * @date December, 2017
  * @version 1.0
  */
-class de_jung : public virtual solution,
-                public virtual core::solutions::de_jung
+class de_jung : public virtual solution
 {
 public:
 

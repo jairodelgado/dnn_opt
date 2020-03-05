@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_GRIEWANGK
 #define DNN_OPT_COPT_SOLUTIONS_GRIEWANGK
 
-#include <core/solutions/griewangk.h>
+#include <core/solutions/bench/griewangk.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -47,8 +47,7 @@ namespace solutions
  * @version 1.0
  * @date November, 2018
  */
-class griewangk : public virtual solution,
-                  public virtual core::solutions::griewangk
+class griewangk : public virtual solution
 {
 public:
 

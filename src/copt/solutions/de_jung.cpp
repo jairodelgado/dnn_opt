@@ -27,9 +27,7 @@ float de_jung::calculate_fitness()
 }
 
 de_jung::de_jung(generator* generator, unsigned int size)
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::de_jung(generator, size)
+: solution(generator, size)
 {
 
 }
