@@ -23,21 +23,7 @@ network* network::make(generator* generator, reader* reader, error* error)
 
 network* network::clone()
 {
-  linked* nn = new linked(this);
-
-  for(auto &l : _layers)
-  {
-    nn->add_layer(l->clone());
-  }
-
-  nn->init();
-  nn->_fitness = fitness();
-  nn->_evaluations = get_evaluations();
-  nn->set_modified(false);
-
-  std::copy_n(get_params(), size(), nn->get_params());
-
-  return nn;
+  // TODO: Fix network implementation in core and copt.
 }
 
 bool network::assignable(const solution* s) const
