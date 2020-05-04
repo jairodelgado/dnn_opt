@@ -38,8 +38,7 @@ namespace copt
 namespace solutions
 {
 
-class wrapper : public virtual solution,
-                public virtual core::solutions::wrapper
+class wrapper : public virtual core::solutions::wrapper
 {
 public:
 
@@ -70,7 +69,6 @@ protected:
 
   wrapper(int index, int count, solution* base)
   : solution(base->get_generator(), 0),
-    core::solution(base->get_generator(), 0),
     core::solutions::wrapper(index, count, base)
   {
 

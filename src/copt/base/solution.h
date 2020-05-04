@@ -28,8 +28,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTION
 #define DNN_OPT_COPT_SOLUTION
 
-#include <copt/base/solution.h>
+#include <core/base/solution.h>
 #include <copt/base/generator.h>
+
 
 namespace dnn_opt
 {

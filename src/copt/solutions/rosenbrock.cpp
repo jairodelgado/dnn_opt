@@ -36,9 +36,7 @@ float rosenbrock::calculate_fitness()
 }
 
 rosenbrock::rosenbrock(generator* generator, unsigned int size )
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::rosenbrock(generator, size)
+: solution(generator, size)
 {
 
 }

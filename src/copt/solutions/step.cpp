@@ -36,9 +36,7 @@ float step::calculate_fitness()
 }
 
 step::step(generator* generator, unsigned int size)
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::step(generator, size)
+: solution(generator, size)
 {
 
 }

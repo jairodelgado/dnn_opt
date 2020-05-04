@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_ROSENBROCK
 #define DNN_OPT_COPT_SOLUTIONS_ROSENBROCK
 
-#include <core/solutions/rosenbrock.h>
+#include <core/solutions/bench/rosenbrock.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -46,8 +46,7 @@ namespace solutions
  * @version 1.0
  * @date November, 2018
  */
-class rosenbrock : public virtual solution,
-                   public virtual core::solutions::rosenbrock
+class rosenbrock : public virtual solution
 {
 public:
   

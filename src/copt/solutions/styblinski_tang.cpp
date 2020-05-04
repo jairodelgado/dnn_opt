@@ -36,9 +36,7 @@ float styblinski_tang::calculate_fitness()
 }
 
 styblinski_tang::styblinski_tang(generator* generator, unsigned int size )
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::styblinski_tang(generator, size)
+: solution(generator, size)
 {
 
 }

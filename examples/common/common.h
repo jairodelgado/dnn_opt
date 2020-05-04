@@ -141,43 +141,43 @@ solution* create_solution(int type, int n, generator* generator)
   switch(type)
   {
   case 0 :
-    return solutions::bench::de_jung::make(generator, n);
+    return solutions::de_jung::make(generator, n);
   case 1:
-    return solutions::bench::ackley::make(generator, n);
+    return solutions::ackley::make(generator, n);
   case 2:
-    return solutions::bench::griewangk::make(generator, n);
+    return solutions::griewangk::make(generator, n);
   case 3:
-    return solutions::bench::rastrigin::make(generator, n);
+    return solutions::rastrigin::make(generator, n);
   case 4:
-    return solutions::bench::rosenbrock::make(generator, n);
+    return solutions::rosenbrock::make(generator, n);
   case 5:
-    return solutions::bench::schwefel::make(generator, n);
+    return solutions::schwefel::make(generator, n);
   case 6:
-    return solutions::bench::styblinski_tang::make(generator, n);
+    return solutions::styblinski_tang::make(generator, n);
   case 7:
-    return solutions::bench::step::make(generator, n);
+    return solutions::step::make(generator, n);
   case 8:
-    return solutions::bench::alpine::make(generator, n);
-  case 9:
-    return solutions::bench::brown::make(generator, n);
-  case 10:
-    return solutions::bench::chung_r::make(generator, n);
-  case 11:
-    return solutions::bench::cosine_m::make(generator, n);
-  case 12:
-    return solutions::bench::csendes::make(generator, n);
-  case 13:
-    return solutions::bench::deb1::make(generator, n);
-  case 14:
-    return solutions::bench::deb3::make(generator, n);
-  case 15:
-    return solutions::bench::dixonp::make(generator, n);
-  case 16:
-    return solutions::bench::eggh::make(generator, n);
-  case 17:
-    return solutions::bench::expo::make(generator, n);
-  case 18:
-    return solutions::bench::giunta::make(generator, n);
+    return solutions::alpine::make(generator, n);
+  //case 9:
+    //return solutions::brown::make(generator, n);
+  //case 10:
+    //return solutions::bench::chung_r::make(generator, n);
+  //case 11:
+    //return solutions::bench::cosine_m::make(generator, n);
+  //case 12:
+    //return solutions::bench::csendes::make(generator, n);
+  //case 13:
+  //  return solutions::bench::deb1::make(generator, n);
+  //case 14:
+   // return solutions::bench::deb3::make(generator, n);
+  //case 15:
+   // return solutions::bench::dixonp::make(generator, n);
+  //case 16:
+    //return solutions::bench::eggh::make(generator, n);
+  //case 17:
+    //return solutions::bench::expo::make(generator, n);
+  //case 18:
+   // return solutions::bench::giunta::make(generator, n);
   default:
     throw invalid_argument("solution type not found");
   }

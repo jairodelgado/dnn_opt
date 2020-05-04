@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_STYBLINSKI_TANG
 #define DNN_OPT_COPT_SOLUTIONS_STYBLINSKI_TANG
 
-#include <core/solutions/styblinski_tang.h>
+#include <core/solutions/bench/styblinski_tang.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -46,8 +46,7 @@ namespace solutions
  * @version 1.0
  * @date November, 2018
  */
-class styblinski_tang : public virtual solution,
-                        public virtual core::solutions::styblinski_tang
+class styblinski_tang : public virtual solution
 {
 public:
   

@@ -36,9 +36,7 @@ float rastrigin::calculate_fitness()
 }
 
 rastrigin::rastrigin(generator* generator, unsigned int size )
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::rastrigin(generator, size)
+: solution(generator, size)
 {
 
 }

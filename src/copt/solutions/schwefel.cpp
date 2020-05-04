@@ -37,9 +37,7 @@ float schwefel::calculate_fitness()
 }
 
 schwefel::schwefel(generator* generator, unsigned int size )
-: solution(generator, size),
-  core::solution(generator, size),
-  core::solutions::schwefel(generator, size)
+: solution(generator, size)
 {
 
 }
