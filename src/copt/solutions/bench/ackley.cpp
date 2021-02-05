@@ -1,12 +1,14 @@
 #include <math.h>
 #include <omp.h>
-#include <copt/solutions/ackley.h>
+#include <copt/solutions/bench/ackley.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 ackley* ackley::make(generator* generator, unsigned int size)
@@ -44,7 +46,7 @@ float ackley::calculate_fitness()
 ackley::ackley(generator* generator, unsigned int size)
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::ackley(generator, size)
+  core::solutions::bench::ackley(generator, size)
 {
 
 }
@@ -54,6 +56,7 @@ ackley::~ackley()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

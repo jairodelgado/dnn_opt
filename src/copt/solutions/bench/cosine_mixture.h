@@ -24,11 +24,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#ifndef DNN_OPT_COPT_SOLUTIONS_BENCH_COSINE_M
+#define DNN_OPT_COPT_SOLUTIONS_BENCH_COSINE_M
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_RASTRIGIN
-#define DNN_OPT_COPT_SOLUTIONS_RASTRIGIN
-
-#include <core/solutions/rastrigin.h>
+#include <core/solutions/bench/cosine_mixture.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,47 +37,51 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::rastrigin
+ * @copydoc core::solutions::bench::cosine_m
  *
- * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
+ *
+ * @author Alejandro Ruiz Madruga <amadruga@estudiantes.uci.cu>
  * @version 1.0
- * @date November, 2018
+ * @date March, 2020
  */
-class rastrigin : public virtual solution,
-                  public virtual core::solutions::rastrigin
+class cosine_m : public virtual solution,
+                 public virtual core::solutions::bench::cosine_m
 {
 public:
 
-  /**
-   * @brief Returns an instance of the rastrigin class.
-   *
-   * @param generator an instance of a generator class.
-   *
-   * @param size is the number of parameters for this solution. Default is 10.
-   *
-   * @return a pointer to an instance of the rastrigin class.
-   */
-  static rastrigin* make(generator* generator, unsigned int size = 10);
+    /**
+     * @brief Returns an instance of the cosine_m class.
+     *
+     * @param generator an instance of a generator class. The
+     * generator is used to initialize the parameters of this solution.
+     *
+     * @param size is the number of parameters for this solution. Default is 2.
+     *
+     * @return an instance of cosine_m class.
+     */
+  static cosine_m* make(generator* generator, unsigned int size = 2);
 
-  virtual ~rastrigin();
+  virtual ~cosine_m();
 
 protected:
 
-  virtual float calculate_fitness() override;
+  virtual float calculate_fitness();
 
   /**
-   * @brief The basic contructor for the ratrigin class.
-   *
+   * @brief This is the basic contructor for this class.
    * @param generator an instance of a generator class.
    *
-   * @param size is the number of parameters for this solution. Default is 10.
+   * @param size is the number of parameters for this solution. Default is 2.
    */
-  rastrigin(generator* generator, unsigned int size );
+  cosine_m(generator* generator, unsigned int size = 2);
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

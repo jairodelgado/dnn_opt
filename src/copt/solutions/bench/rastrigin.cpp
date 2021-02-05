@@ -1,12 +1,14 @@
 #include <cmath>
 #include <omp.h>
-#include <copt/solutions/rastrigin.h>
+#include <copt/solutions/bench/rastrigin.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 rastrigin* rastrigin::make(generator* generator, unsigned int size)
@@ -38,7 +40,7 @@ float rastrigin::calculate_fitness()
 rastrigin::rastrigin(generator* generator, unsigned int size )
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::rastrigin(generator, size)
+  core::solutions::bench::rastrigin(generator, size)
 {
 
 }
@@ -48,6 +50,7 @@ rastrigin::~rastrigin()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

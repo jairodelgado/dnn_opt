@@ -1,11 +1,13 @@
 #include <cblas.h>
-#include <copt/solutions/de_jung.h>
+#include <copt/solutions/bench/de_jung.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 de_jung* de_jung::make(generator *generator, unsigned int size)
@@ -19,7 +21,12 @@ de_jung* de_jung::make(generator *generator, unsigned int size)
 
 float de_jung::calculate_fitness()
 {  
-  float result = cblas_sdot(size(), get_params(), 1, get_params(), 1);
+  float result;
+
+  #pragma omp parallel
+  {
+  result = cblas_sdot(size(), get_params(), 1, get_params(), 1);
+  }
 
   solution::calculate_fitness();
 
@@ -29,7 +36,7 @@ float de_jung::calculate_fitness()
 de_jung::de_jung(generator* generator, unsigned int size)
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::de_jung(generator, size)
+  core::solutions::bench::de_jung(generator, size)
 {
 
 }
@@ -39,6 +46,7 @@ de_jung::~de_jung()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

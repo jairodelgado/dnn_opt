@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DNN_OPT_COPT_SOLUTIONS_STEP
 #define DNN_OPT_COPT_SOLUTIONS_STEP
 
-#include <core/solutions/step.h>
+#include <core/solutions/bench/step.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -37,6 +37,8 @@ namespace dnn_opt
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 /**
@@ -47,7 +49,7 @@ namespace solutions
  * @date November, 2018
  */
 class step : public virtual solution,
-             public virtual core::solutions::step
+             public virtual core::solutions::bench::step
 {
 public:
 
@@ -82,6 +84,7 @@ protected:
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

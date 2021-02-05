@@ -25,10 +25,10 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_ROSENBROCK
-#define DNN_OPT_COPT_SOLUTIONS_ROSENBROCK
+#ifndef DNN_OPT_COPT_SOLUTIONS_BENCH_ACKLEY
+#define DNN_OPT_COPT_SOLUTIONS_BENCH_ACKLEY
 
-#include <core/solutions/rosenbrock.h>
+#include <core/solutions/bench/ackley.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,35 +38,39 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::rosenbrock
+ * @copydoc core::solutions::bench::ackley
+ *
  *
  * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
  * @version 1.0
  * @date November, 2018
  */
-class rosenbrock : public virtual solution,
-                   public virtual core::solutions::rosenbrock
+class ackley : public virtual solution,
+               public virtual core::solutions::bench::ackley
 {
 public:
-  
+
   /**
-   * @brief Returns an instance of the rosenbrock class.
+   * @brief Returns an instance of the ackley class.
    *
-   * @param generator an instance of a generator class. 
+   * @param generator an instance of a generator class. The
+   * generator is used to initialize the parameters of this solution.
    *
    * @param size is the number of parameters for this solution. Default is 10.
    *
-   * @return an instance of rosenbrock class.
+   * @return an instance of ackley class.
    */
-  static rosenbrock* make(generator* generator, unsigned int size = 10);
+  static ackley* make(generator* generator, unsigned int size = 10);
 
-  virtual ~rosenbrock();
+  virtual ~ackley();
 
 protected:
 
-  virtual float calculate_fitness() override;
+   virtual float calculate_fitness() override;
 
   /**
    * @brief The basic contructor for this class.
@@ -77,10 +81,11 @@ protected:
    *
    * @param size is the number of parameters for this solution. Default is 10.
    */
-  rosenbrock(generator* generator, unsigned int size );
+  ackley(generator* generator, unsigned int size = 10 );
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

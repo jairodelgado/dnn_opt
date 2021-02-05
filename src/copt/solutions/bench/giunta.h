@@ -24,11 +24,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#ifndef DNN_OPT_COPT_SOLUTIONS_BENCH_GIUNTA
+#define DNN_OPT_COPT_SOLUTIONS_BENCH_GIUNTA
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_DE_JUNG
-#define DNN_OPT_COPT_SOLUTIONS_DE_JUNG
-
-#include <core/solutions/de_jung.h>
+#include <core/solutions/bench/giunta.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,31 +37,50 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::de_jung
+ * @copydoc core::solutions::bench::giunta
  *
- * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
- * @date December, 2017
+ * @author Alejandro Ruiz Madruga <amadruga@estudiantes.uci.cu>
+ * @date March, 2020
  * @version 1.0
  */
-class de_jung : public virtual solution,
-                public virtual core::solutions::de_jung
+class giunta : public virtual solution,
+               public virtual core::solutions::bench::giunta
 {
 public:
 
-  static de_jung* make(generator* generator, unsigned int size = 10);
+    /**
+     * @brief Returns an instance of the giunta class.
+     *
+     * @param generator an instance of a generator class. The
+     * generator is used to initialize the parameters of this solution.
+     *
+     * @param size is the number of parameters for this solution. Default is 1024.
+     *
+     * @return an instance of giunta class.
+     */
+  static giunta* make(generator* generator, unsigned int size = 2);
 
-  virtual ~de_jung();
+  virtual ~giunta();
 
 protected:
 
-  virtual float calculate_fitness() override;
+  virtual float calculate_fitness();
 
-  de_jung(generator* generator, unsigned int size = 10);
+  /**
+   * @brief This is the basic contructor for this class.
+   * @param generator an instance of a generator class.
+   *
+   * @param size is the number of parameters for this solution. Default is 2.
+   */
+  giunta(generator* generator, unsigned int size = 2);
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

@@ -25,10 +25,10 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_ALPINE
-#define DNN_OPT_COPT_SOLUTIONS_ALPINE
+#ifndef DNN_OPT_COPT_SOLUTIONS_SCHWEFEL
+#define DNN_OPT_COPT_SOLUTIONS_SCHWEFEL
 
-#include <core/solutions/alpine.h>
+#include <core/solutions/bench/schwefel.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,50 +38,50 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::alpine
+ * @copydoc core::solutions::schwefel
  *
  * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
  * @version 1.0
  * @date November, 2018
  */
-class alpine : public virtual solution,
-               public virtual core::solutions::alpine
+class schwefel : public virtual solution,
+                 public virtual core::solutions::bench::schwefel
 {
 public:
 
   /**
-   * @brief Returns an instance of the alpine class.
+   * @brief Returns an instance of the schwefel class.
    *
-   * @param generator an instance of a generator class. The
-   * generator is used to initialize the parameters of this solution.
+   * @param generator an instance of a generator class.
    *
    * @param size is the number of parameters for this solution. Default is 10.
    *
-   * @return an instance of alpine class.
+   * @return a pointer to an instance of the schwefel class.
    */
-  static alpine* make(generator* generator, unsigned int size = 10);
+  static schwefel* make(generator* generator, unsigned int size = 10);
 
-  virtual ~alpine();
+  virtual ~schwefel();
 
 protected:
 
-   virtual float calculate_fitness() override;
+  virtual float calculate_fitness() override;
 
   /**
    * @brief The basic contructor for this class.
    *
    * @param generator an instance of a generator class.
-   * The generator is used to initialize the parameters of this
-   * solution.
    *
    * @param size is the number of parameters for this solution. Default is 10.
    */
-  alpine(generator* generator, unsigned int size = 10 );
+  schwefel(generator* generator, unsigned int size );
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

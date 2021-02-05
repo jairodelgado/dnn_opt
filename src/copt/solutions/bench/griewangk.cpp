@@ -1,12 +1,14 @@
 #include <cmath>
 #include <omp.h>
-#include <copt/solutions/griewangk.h>
+#include <copt/solutions/bench/griewangk.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 griewangk* griewangk::make(generator* generator, unsigned int size)
@@ -43,7 +45,7 @@ float griewangk::calculate_fitness()
 griewangk::griewangk(generator* generator, unsigned int size)
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::griewangk(generator, size)
+  core::solutions::bench::griewangk(generator, size)
 {
 
 }
@@ -53,6 +55,7 @@ griewangk::~griewangk()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

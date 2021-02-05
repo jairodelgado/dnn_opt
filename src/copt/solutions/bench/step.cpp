@@ -1,12 +1,14 @@
 #include <cmath>
 #include <omp.h>
-#include <copt/solutions/step.h>
+#include <copt/solutions/bench/step.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 step* step::make(generator* generator, unsigned int size)
@@ -38,7 +40,7 @@ float step::calculate_fitness()
 step::step(generator* generator, unsigned int size)
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::step(generator, size)
+  core::solutions::bench::step(generator, size)
 {
 
 }
@@ -48,6 +50,7 @@ step::~step()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

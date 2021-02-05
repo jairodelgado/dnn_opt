@@ -1,12 +1,14 @@
 #include <cmath>
 #include <omp.h>
-#include <copt/solutions/styblinski_tang.h>
+#include <copt/solutions/bench/styblinski_tang.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 styblinski_tang* styblinski_tang::make(generator* generator, unsigned int size)
@@ -38,7 +40,7 @@ float styblinski_tang::calculate_fitness()
 styblinski_tang::styblinski_tang(generator* generator, unsigned int size )
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::styblinski_tang(generator, size)
+  core::solutions::bench::styblinski_tang(generator, size)
 {
 
 }
@@ -48,6 +50,7 @@ styblinski_tang::~styblinski_tang()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

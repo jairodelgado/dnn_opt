@@ -1,12 +1,14 @@
 #include <cmath>
 #include <omp.h>
-#include <copt/solutions/schwefel.h>
+#include <copt/solutions/bench/schwefel.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 schwefel* schwefel::make(generator* generator, unsigned int size)
@@ -39,7 +41,7 @@ float schwefel::calculate_fitness()
 schwefel::schwefel(generator* generator, unsigned int size )
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::schwefel(generator, size)
+  core::solutions::bench::schwefel(generator, size)
 {
 
 }
@@ -49,6 +51,7 @@ schwefel::~schwefel()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

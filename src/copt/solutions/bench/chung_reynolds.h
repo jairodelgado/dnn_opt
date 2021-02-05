@@ -24,11 +24,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#ifndef DNN_OPT_COPT_SOLUTIONS_BENCH_CHUNG_R
+#define DNN_OPT_COPT_SOLUTIONS_BENCH_CHUNG_R
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_GRIEWANGK
-#define DNN_OPT_COPT_SOLUTIONS_GRIEWANGK
-
-#include <core/solutions/griewangk.h>
+#include <core/solutions/bench/chung_reynolds.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,48 +37,51 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::griewangk
+ * @copydoc core::solutions::bench::chung_r
  *
  *
- * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
+ * @author Alejandro Ruiz Madruga <amadruga@estudiantes.uci.cu>
  * @version 1.0
- * @date November, 2018
+ * @date March, 2020
  */
-class griewangk : public virtual solution,
-                  public virtual core::solutions::griewangk
+class chung_r : public virtual solution,
+                public virtual core::solutions::bench::chung_r
 {
 public:
 
-  /**
-   * @brief Returns an instance of the griewangk class.
-   *
-   * @param generator an instance of a generator class.
-   *
-   * @param size is the number of parameters for this solution. Default is 10.
-   *
-   * @return a pointer to an instance of the griewangk class.
-   */
-  static griewangk* make(generator* generator, unsigned int size = 10);
+    /**
+     * @brief Returns an instance of the chung_r class.
+     *
+     * @param generator an instance of a generator class. The
+     * generator is used to initialize the parameters of this solution.
+     *
+     * @param size is the number of parameters for this solution. Default is 200.
+     *
+     * @return an instance of chung_r class.
+     */
+  static chung_r* make(generator* generator, unsigned int size = 200);
 
-  virtual ~griewangk();
+  virtual ~chung_r();
 
 protected:
 
-  virtual float calculate_fitness() override;
+  virtual float calculate_fitness();
 
   /**
-   * @brief Thhe basic contructor for this class.
-   *
+   * @brief This is the basic contructor for this class.
    * @param generator an instance of a generator class.
    *
-   * @param size is the number of parameters for this solution. Default is 10.
+   * @param size is the number of parameters for this solution. Default is 200.
    */
-  griewangk(generator* generator, unsigned int size = 10);
+  chung_r(generator* generator, unsigned int size = 200);
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

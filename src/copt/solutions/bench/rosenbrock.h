@@ -25,10 +25,10 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_SCHWEFEL
-#define DNN_OPT_COPT_SOLUTIONS_SCHWEFEL
+#ifndef DNN_OPT_COPT_SOLUTIONS_ROSENBROCK
+#define DNN_OPT_COPT_SOLUTIONS_ROSENBROCK
 
-#include <core/solutions/schwefel.h>
+#include <core/solutions/bench/rosenbrock.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,31 +38,33 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::schwefel
+ * @copydoc core::solutions::rosenbrock
  *
  * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
  * @version 1.0
  * @date November, 2018
  */
-class schwefel : public virtual solution,
-                 public virtual core::solutions::schwefel
+class rosenbrock : public virtual solution,
+                   public virtual core::solutions::bench::rosenbrock
 {
 public:
-
+  
   /**
-   * @brief Returns an instance of the schwefel class.
+   * @brief Returns an instance of the rosenbrock class.
    *
-   * @param generator an instance of a generator class.
+   * @param generator an instance of a generator class. 
    *
    * @param size is the number of parameters for this solution. Default is 10.
    *
-   * @return a pointer to an instance of the schwefel class.
+   * @return an instance of rosenbrock class.
    */
-  static schwefel* make(generator* generator, unsigned int size = 10);
+  static rosenbrock* make(generator* generator, unsigned int size = 10);
 
-  virtual ~schwefel();
+  virtual ~rosenbrock();
 
 protected:
 
@@ -72,13 +74,16 @@ protected:
    * @brief The basic contructor for this class.
    *
    * @param generator an instance of a generator class.
+   * The generator is used to initialize the parameters of this
+   * solution.
    *
    * @param size is the number of parameters for this solution. Default is 10.
    */
-  schwefel(generator* generator, unsigned int size );
+  rosenbrock(generator* generator, unsigned int size );
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

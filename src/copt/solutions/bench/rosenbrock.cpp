@@ -1,12 +1,14 @@
 #include <math.h>
 #include <omp.h>
-#include <copt/solutions/rosenbrock.h>
+#include <copt/solutions/bench/rosenbrock.h>
 
 namespace dnn_opt
 {
 namespace copt
 {
 namespace solutions
+{
+namespace bench
 {
 
 rosenbrock* rosenbrock::make(generator* generator, unsigned int size)
@@ -38,7 +40,7 @@ float rosenbrock::calculate_fitness()
 rosenbrock::rosenbrock(generator* generator, unsigned int size )
 : solution(generator, size),
   core::solution(generator, size),
-  core::solutions::rosenbrock(generator, size)
+  core::solutions::bench::rosenbrock(generator, size)
 {
 
 }
@@ -48,6 +50,7 @@ rosenbrock::~rosenbrock()
 
 }
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

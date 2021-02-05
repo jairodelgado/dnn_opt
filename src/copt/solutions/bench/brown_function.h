@@ -24,11 +24,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#ifndef DNN_OPT_COPT_SOLUTIONS_BENCH_BROWN
+#define DNN_OPT_COPT_SOLUTIONS_BENCH_BROWN
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_STYBLINSKI_TANG
-#define DNN_OPT_COPT_SOLUTIONS_STYBLINSKI_TANG
-
-#include <core/solutions/styblinski_tang.h>
+#include <core/solutions/bench/brown_function.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,47 +37,51 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::styblinski_tang
+ * @copydoc core::solutions::bench::brown
  *
- * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
+ *
+ * @author Alejandro Ruiz Madruga <amadruga@estudiantes.uci.cu>
  * @version 1.0
- * @date November, 2018
+ * @date March, 2020
  */
-class styblinski_tang : public virtual solution,
-                        public virtual core::solutions::styblinski_tang
+class brown : public virtual solution,
+              public virtual core::solutions::bench::brown
 {
 public:
-  
-  /**
-   * @brief Returns an instance the styblinski_tang class.
-   *
-   * @param generator an instance of a generator class. 
-   *
-   * @param size is the number of parameters for this solution. Default is 10.
-   *
-   * @return an instance of styblinski_tang class.
-   */
-  static styblinski_tang* make(generator* generator, unsigned int size = 10);
 
-  virtual ~styblinski_tang();
+    /**
+     * @brief Returns an instance of the brown class.
+     *
+     * @param generator an instance of a generator class. The
+     * generator is used to initialize the parameters of this solution.
+     *
+     * @param size is the number of parameters for this solution. Default is 5.
+     *
+     * @return an instance of brown class.
+     */
+  static brown* make(generator* generator, unsigned int size = 5);
+
+  virtual ~brown();
 
 protected:
 
-  virtual float calculate_fitness() override;
+  virtual float calculate_fitness();
 
   /**
-   * @brief The basic contructor for this class.
-   *
+   * @brief This is the basic contructor for this class.
    * @param generator an instance of a generator class.
    *
-   * @param size is the number of parameters for this solution. Default is 10.
+   * @param size is the number of parameters for this solution. Default is 5.
    */
-  styblinski_tang(generator* generator, unsigned int size );
+  brown(generator* generator, unsigned int size = 5);
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt

@@ -24,11 +24,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#ifndef DNN_OPT_COPT_SOLUTIONS_BENCH_DIXONP
+#define DNN_OPT_COPT_SOLUTIONS_BENCH_DIXONP
 
-#ifndef DNN_OPT_COPT_SOLUTIONS_ACKLEY
-#define DNN_OPT_COPT_SOLUTIONS_ACKLEY
-
-#include <core/solutions/ackley.h>
+#include <core/solutions/bench/dixonp.h>
 #include <copt/base/generator.h>
 #include <copt/base/solution.h>
 
@@ -38,51 +37,50 @@ namespace copt
 {
 namespace solutions
 {
+namespace bench
+{
 
 /**
- * @copydoc core::solutions::ackley
+ * @copydoc core::solutions::bench::dixonp
  *
- *
- * @author Jairo Rojas-Delgado <jrdelgado@uci.cu>
+ * @author Alejandro Ruiz Madruga <amadruga@estudiantes.uci.cu>
+ * @date March, 2020
  * @version 1.0
- * @date November, 2018
  */
-class ackley : public virtual solution,
-               public virtual core::solutions::ackley
+class dixonp : public virtual solution,
+               public virtual core::solutions::bench::dixonp
 {
 public:
 
-  /**
-   * @brief Returns an instance of the ackley class.
-   *
-   * @param generator an instance of a generator class. The
-   * generator is used to initialize the parameters of this solution.
-   *
-   * @param size is the number of parameters for this solution. Default is 10.
-   *
-   * @return an instance of ackley class.
-   */
-  static ackley* make(generator* generator, unsigned int size = 10);
+    /**
+     * @brief Returns an instance of the dixonp class.
+     *
+     * @param generator an instance of a generator class. The
+     * generator is used to initialize the parameters of this solution.
+     *
+     * @param size is the number of parameters for this solution. Default is 20.
+     *
+     * @return an instance of dixonp class.
+     */
+  static dixonp* make(generator* generator, unsigned int size = 20);
 
-  virtual ~ackley();
+  virtual ~dixonp();
 
 protected:
 
-   virtual float calculate_fitness() override;
+  virtual float calculate_fitness();
 
   /**
-   * @brief The basic contructor for this class.
-   *
+   * @brief This is the basic contructor for this class.
    * @param generator an instance of a generator class.
-   * The generator is used to initialize the parameters of this
-   * solution.
    *
-   * @param size is the number of parameters for this solution. Default is 10.
+   * @param size is the number of parameters for this solution. Default is 20.
    */
-  ackley(generator* generator, unsigned int size = 10 );
+  dixonp(generator* generator, unsigned int size = 20);
 
 };
 
+} // namespace bench
 } // namespace solutions
 } // namespace copt
 } // namespace dnn_opt
